@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Criar conta - Orbit</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #111827;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .cadastro {
+            width: 100%;
+            max-width: 440px;
+
+            background: #1f2937;
+
+            padding: 32px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .logo {
+            text-align: center;
+
+            font-size: 55px;
+
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            text-align: center;
+
+            font-size: 32px;
+
+            margin: 0;
+        }
+
+        .subtitulo {
+            text-align: center;
+
+            color: #9ca3af;
+
+            margin: 10px 0 28px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 14px;
+
+            margin-bottom: 18px;
+
+            background: #111827;
+
+            color: white;
+
+            border: 2px solid #374151;
+
+            border-radius: 9px;
+
+            outline: none;
+
+            font-size: 16px;
+        }
+
+        input:focus {
+            border-color: #5865f2;
+        }
+
+        .termos {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+
+            margin: 5px 0 20px;
+
+            color: #9ca3af;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+        .termos input {
+            width: 18px;
+
+            height: 18px;
+
+            margin: 2px 0 0;
+
+            flex-shrink: 0;
+        }
+
+        .termos a {
+            color: #7c83ff;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .termos a:hover {
+            text-decoration: underline;
+        }
+
+        .botao {
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #5865f2;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .botao:disabled {
+            background: #454b8c;
+
+            color: #aaa;
+
+            cursor: not-allowed;
+        }
+
+        .mensagem {
+            text-align: center;
+
+            margin-top: 15px;
+
+            font-weight: bold;
+        }
+
+        .erro {
+            color: #ff6b6b;
+        }
+
+        .sucesso {
+            color: #4ade80;
+        }
+
+        .login {
+            text-align: center;
+
+            margin-top: 23px;
+
+            color: #9ca3af;
+        }
+
+        .login a {
+            color: #7c83ff;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .voltar {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #9ca3af;
+
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+        .voltar:hover {
+            color: white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="cadastro">
+
+        <div class="logo">
+            🌐
+        </div>
+
+        <h1>
+            Criar conta
+        </h1>
+
+        <p class="subtitulo">
+            Crie sua conta e entre no Orbit!
+        </p>
+
+
+        <label for="usuario">
+            Nome de usuário
+        </label>
+
+        <input
+            type="text"
+            id="usuario"
+            placeholder="Escolha seu nome"
+            maxlength="20"
+        >
+
+
+        <label for="email">
+            E-mail
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Digite seu e-mail"
+        >
+
+
+        <label for="senha">
+            Senha
+        </label>
+
+        <input
+            type="password"
+            id="senha"
+            placeholder="Crie uma senha"
+        >
+
+
+        <label for="confirmar">
+            Confirmar senha
+        </label>
+
+        <input
+            type="password"
+            id="confirmar"
+            placeholder="Digite a senha novamente"
+        >
+
+
+        <div class="termos">
+
+            <input
+                type="checkbox"
+                id="aceitar"
+                onchange="verificarTermos()"
+            >
+
+            <span>
+
+                Li e aceito os
+
+                <a
+                    href="#"
+                    onclick="mostrarTermos(event)"
+                >
+                    Termos de Uso
+                </a>
+
+                e a
+
+                <a
+                    href="#"
+                    onclick="mostrarPrivacidade(event)"
+                >
+                    Política de Privacidade
+                </a>.
+
+            </span>
+
+        </div>
+
+
+        <button
+            class="botao"
+            id="criar"
+            onclick="criarConta()"
+            disabled
+        >
+            Criar conta
+        </button>
+
+
+        <div
+            id="mensagem"
+            class="mensagem"
+        ></div>
+
+
+        <div class="login">
+
+            Já tem uma conta?
+
+            <a href="login.html">
+                Entrar
+            </a>
+
+        </div>
+
+
+        <a
+            href="index.html"
+            class="voltar"
+        >
+            ← Voltar para o início
+        </a>
+
+    </div>
+
+
+    <script>
+
+        /*
+        ========================================
+        ORBIT - BANCO DE DADOS LOCAL
+        ========================================
+        */
+
+        function carregarUsuarios() {
+
+            const dados =
+                localStorage.getItem("orbit_usuarios");
+
+            if (!dados) {
+
+                return [];
+
+            }
+
+            try {
+
+                return JSON.parse(dados);
+
+            } catch (erro) {
+
+                return [];
+
+            }
+
+        }
+
+
+        function salvarUsuarios(usuarios) {
+
+            localStorage.setItem(
+                "orbit_usuarios",
+                JSON.stringify(usuarios)
+            );
+
+        }
+
+
+        /*
+        ========================================
+        ATIVAR / DESATIVAR BOTÃO
+        ========================================
+        */
+
+        function verificarTermos() {
+
+            const checkbox =
+                document.getElementById("aceitar");
+
+            const botao =
+                document.getElementById("criar");
+
+
+            if (checkbox.checked) {
+
+                botao.disabled = false;
+
+            } else {
+
+                botao.disabled = true;
+
+            }
+
+        }
+
+
+        /*
+        ========================================
+        CRIAR CONTA
+        ========================================
+        */
+
+        function criarConta() {
+
+            const usuario =
+                document
+                .getElementById("usuario")
+                .value
+                .trim();
+
+
+            const email =
+                document
+                .getElementById("email")
+                .value
+                .trim()
+                .toLowerCase();
+
+
+            const senha =
+                document
+                .getElementById("senha")
+                .value;
+
+
+            const confirmar =
+                document
+                .getElementById("confirmar")
+                .value;
+
+
+            const mensagem =
+                document.getElementById("mensagem");
+
+
+            /*
+            VERIFICAR CAMPOS
+            */
+
+            if (
+                usuario === "" ||
+                email === "" ||
+                senha === "" ||
+                confirmar === ""
+            ) {
+
+                mensagem.textContent =
+                    "Preencha todos os campos.";
+
+                mensagem.className =
+                    "mensagem erro";
+
+                return;
+
+            }
+
+
+            /*
+            VERIFICAR USUÁRIO
+            */
+
+            if (usuario.length < 3) {
+
+                mensagem.textContent =
+                    "O nome de usuário precisa ter pelo menos 3 caracteres.";
+
+                mensagem.className =
+                    "mensagem erro";
+
+                return;
+
+            }
+
+
+            /*
+            VERIFICAR E-MAIL
+            */
+
+            if (
+                !email.includes("@") ||
+                !email.includes(".")
+            ) {
+
+                mensagem.textContent =
+                    "Digite um e-mail válido.";
+
+                mensagem.className =
+                    "mensagem erro";
+
+                return;
+
+            }
+
+
+            /*
+            VERIFICAR SENHA
+            */
+
+            if (senha.length < 6) {
+
+                mensagem.textContent =
+                    "A senha precisa ter pelo menos 6 caracteres.";
+
+                mensagem.className =
+                    "mensagem erro";
+
+                return;
+
+            }
+
+
+            /*
+            CONFIRMAR SENHA
+            */
+
+            if (senha !== confirmar) {
+
+                mensagem.textContent =
+                    "As senhas não são iguais.";
+
+                mensagem.className =
+                    "mensagem erro";
+
+                return;
+
+            }
+
+
+            /*
+            CARREGAR USUÁRIOS
+            */
+
+            const usuarios =
+                carregarUsuarios();
+
+
+            /*
+            VERIFICAR E-MAIL DUPLICADO
+            */
+
+            const emailExiste =
+                usuarios.some(function(item) {
+
+                    return item.email === email;
+
+                });
+
+
+            if (emailExiste) {
+
+                mensagem.textContent =
+                    "Esse e-mail já está cadastrado.";
+
+                mensagem.className =
+                    "mensagem erro";
+
+                return;
+
+            }
+
+
+            /*
+            VERIFICAR NOME DUPLICADO
+            */
+
+            const usuarioExiste =
+                usuarios.some(function(item) {
+
+                    return item.usuario.toLowerCase()
+                        === usuario.toLowerCase();
+
+                });
+
+
+            if (usuarioExiste) {
+
+                mensagem.textContent =
+                    "Esse nome de usuário já está sendo usado.";
+
+                mensagem.className =
+                    "mensagem erro";
+
+                return;
+
+            }
+
+
+            /*
+            CRIAR USUÁRIO
+            */
+
+            const novoUsuario = {
+
+                id: Date.now(),
+
+                usuario: usuario,
+
+                email: email,
+
+                senha: senha,
+
+                criadoEm:
+                    new Date().toISOString()
+
+            };
+
+
+            /*
+            ADICIONAR AO BANCO
+            */
+
+            usuarios.push(novoUsuario);
+
+
+            /*
+            SALVAR NO CELULAR
+            */
+
+            salvarUsuarios(usuarios);
+
+
+            /*
+            MOSTRAR SUCESSO
+            */
+
+            mensagem.textContent =
+                "Conta criada com sucesso! 🚀";
+
+            mensagem.className =
+                "mensagem sucesso";
+
+
+            /*
+            DESATIVAR BOTÃO
+            */
+
+            document.getElementById("criar").disabled =
+                true;
+
+
+            /*
+            IR PARA LOGIN
+            */
+
+            setTimeout(function() {
+    window.location.href = "./login.html";
+}, 1500);
+
+        }
+
+
+        /*
+        ========================================
+        TERMOS DE USO
+        ========================================
+        */
+
+        function mostrarTermos(event) {
+
+            event.preventDefault();
+
+
+            alert(
+                "TERMOS DE USO DO ORBIT\n\n" +
+
+                "O Orbit é uma plataforma de comunidades.\n\n" +
+
+                "Os usuários devem respeitar outras pessoas " +
+
+                "e não utilizar a plataforma para atividades " +
+
+                "ilegais, fraudes, ameaças ou assédio."
+            );
+
+        }
+
+
+        /*
+        ========================================
+        POLÍTICA DE PRIVACIDADE
+        ========================================
+        */
+
+        function mostrarPrivacidade(event) {
+
+            event.preventDefault();
+
+
+            alert(
+                "POLÍTICA DE PRIVACIDADE DO ORBIT\n\n" +
+
+                "Esta versão do Orbit utiliza armazenamento " +
+
+                "local apenas para testes.\n\n" +
+
+                "Não utilize senhas reais neste protótipo."
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>

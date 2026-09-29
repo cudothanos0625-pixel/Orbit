@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Orbit</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111827;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.card {
+    width: 90%;
+    max-width: 400px;
+    background: #1f2937;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    background: #111827;
+    color: white;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #5865f2;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #4752c4;
+}
+
+#mensagem {
+    text-align: center;
+    margin-top: 15px;
+    color: #f87171;
+}
+
+a {
+    color: #8b93ff;
+    text-decoration: none;
+}
+
+.links {
+    text-align: center;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>🌐 Entrar no Orbit</h1>
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Seu email"
+    >
+
+    <input
+        type="password"
+        id="senha"
+        placeholder="Sua senha"
+    >
+
+    <button onclick="entrar()">
+        🚀 Entrar
+    </button>
+
+    <div id="mensagem"></div>
+
+    <div class="links">
+        Ainda não tem conta?<br>
+        <a href="Cadastro.html">Criar conta</a>
+        <br><br>
+        <a href="index.html">Voltar</a>
+    </div>
+
+</div>
+
+<script>
+
+function entrar() {
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const senha =
+        document.getElementById("senha").value;
+
+    const mensagem =
+        document.getElementById("mensagem");
+
+    if (email === "" || senha === "") {
+        mensagem.textContent =
+            "Preencha todos os campos!";
+        return;
+    }
+
+    // Pega as contas cadastradas
+    const usuarios =
+        JSON.parse(
+            localStorage.getItem("orbit_usuarios")
+        ) || [];
+
+    // Procura uma conta com email e senha iguais
+    const usuario =
+        usuarios.find(function(u) {
+            return u.email === email &&
+                   u.senha === senha;
+        });
+
+    // Se não encontrou
+    if (!usuario) {
+
+        mensagem.textContent =
+            "❌ Email ou senha incorretos!";
+
+        return;
+    }
+
+    // Salva quem está logado
+    localStorage.setItem(
+        "orbit_usuario_atual",
+        usuario.email
+    );
+
+    mensagem.style.color = "#4ade80";
+
+    mensagem.textContent =
+        "✅ Login realizado!";
+
+    // Vai para o Orbit
+    setTimeout(function() {
+        window.location.href = "./inicio.html";
+    }, 500);
+}
+
+</script>
+
+</body>
+</html>
